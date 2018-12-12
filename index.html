@@ -1,0 +1,391 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sunblind.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+
+	<body>
+
+		<div class="line top"></div>
+    <div class="line bottom"></div>
+    <div class="line left"></div>
+    <div class="line right"></div>
+
+		<div class="reveal">
+			<div class="slides">
+				<section id = "titulo" style = "text-align:justify;">
+					<h1 style = "font-size:60px;font-weight: bold;"> Redes neurais convolucionais: Um classificador para diagnóstico de câncer de mama. </h1>
+					<p style = "font-size:25px" >Gabriela Borges </p>
+					<p style = "font-size:25px" >Prof. Dr. Ricardo Rocha</p>
+				</section>
+				<section class = "sumario" style = "text-align:justify;">
+					<h1 style = "font-weight: bold;"> Sumário </h1>
+					<ul>
+						<li> Introdução </li>
+						<li> Aprendizado de máquina </li>
+						<li> Redes neurais artificiais
+							<ul>
+								<li> Conceitos gerais </li>
+								<li> Estudo de caso: Wisconsin Dataset </li>
+							</ul>
+						</li>
+						<li> Redes neurais c
+
+							onvolucionais
+							<ul>
+								<li> Conceitos gerais </li>
+								<li> Estudo de caso: MIAS Dataset </li>
+							</ul>
+						</li>
+						<li> Conclusão </li>
+					</ul>
+				</section>
+
+				<section class = "introducao">
+					<h1 style = "text-align:justify;font-weight: bold;"> Introdução </h1>
+					<section>
+						<p style = "text-align:justify;" > O diagnóstico médico é o processo analítico de
+							 um exame ou quadro clínico para chegada de uma conclusão.
+						</p>
+
+						<a> <img src = "img/cancer_colo.png" style = "text-align:center;"> </a>
+
+						<p style = "text-align:justify;"> Dados sobre diagnósticos corretos estão sendo frequentemente
+							 disponibilizados na forma de registros médicos
+							 (<a href = "https://www.ncbi.nlm.nih.gov/pubmed/11470218">Igor, 2001 </a>).
+					 	</p>
+					</section>
+					<section>
+						<p style = "text-align:justify;">
+							O uso de imagens para diagnóstico continua sendo “padrão ouro” para várias doenças, incluindo quase todos os tipos de câncer
+							 (<a href = "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4729702/">Xu et al, 2016</a>	).
+						</p>
+
+						<a> <img src = "img/mamografia.jpg" height="240" width="400" style = "text-align:center;"> </a>
+
+						<p style = "text-align:justify;">
+							Em particular, o câncer de mama tem um quadro assintomático que pode ser detectado com mamografia e,
+							portanto a mamografia é o principal exame para triagem.
+						</p>
+					</section>
+					<section>
+						<p style = "text-align:justify;" >
+						 	A interpretação humana é afetada pela fadiga e subjetividade e pode gerar diagnósticos errados
+							 (<a href = "https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7463094">Greenspan, 2016 </a>).
+						</p>
+
+						<a> <img src = "img/performance.png" style = "text-align:center;"> </a>
+
+						<p style = "text-align:justify;" >
+							Com os avanços no processamento de imagens, reconhecimento de padrões e
+							aprendizado de máquina tem sido possível melhorar o diagnóstico dos radiologistas
+							 através do uso de sistemas computadorizados de diagnóstico
+							 (<a href = "https://www.annualreviews.org/doi/full/10.1146/annurev-bioeng-071516-044442"> Shen, 2017 </a>).
+						</p>
+
+					</section>
+				</section>
+
+				<section class = "aprendizado">
+					<h1 style = "text-align:justify;font-weight: bold;"> Aprendizado de máquina </h1>
+					<section>
+
+						<p style = "text-align:justify;">
+							O aprendizado de máquina (AM) consiste em técnicas
+							baseadas em reconhecimento de padrões
+							que, caracteriza, descreve e faz predições sobre um conjunto de dados.
+						</p>
+
+						<a> <img src = "img/flowchart.svg" style = "text-align:center;" height="370" width="700"> </a>
+					</section>
+
+					<section>
+						<table style="width:100%">
+						  <tr>
+						    <th>Aprendizado de máquina</th>
+						    <th>Estatistiquês</th>
+						  </tr>
+						  <tr>
+						    <td>Redes, algoritmos</td>
+						    <td>Modelos</td>
+						  </tr>
+						  <tr>
+						    <td>Pesos</td>
+						    <td>Parâmetros</td>
+						  </tr>
+							<tr>
+								<td>Treinamento</td>
+								<td>Estimação</td>
+							</tr>
+							<tr>
+								<td>Generalização</td>
+								<td>Teste de performance</td>
+							</tr>
+							<tr>
+								<td><i>Features</i></td>
+								<td>Variáveis preditoras</td>
+							</tr>
+							<tr>
+								<td>Aprendizado supervisionado</td>
+								<td>Modelos de regressão</td>
+							</tr>
+							<tr>
+								<td>Aprendizado não-supervisionado</td>
+								<td>Estimação de densidade, agrupamento, redução de dimensionalidade</td>
+							</tr>
+						</table>
+					</section>
+
+					<section>
+						<p style = "text-align:justify;">
+							As técnicas de AM supervisionado são utilizadas quando o objetivo é caracterizar ou predizer
+							uma variável resposta que é conhecida e está disponível no banco de dados, de acordo com variáveis preditoras.
+						</p>
+						<br>
+						<p style = "font-size:50px;font-family: "Lora", sans-serif;"> Y = y(<b>x</b>, <b>w</b>) </p>
+						<br>
+						<p style = "text-align:justify;">
+							Em que Y é a variável resposta, <b>x</b> são as variáveis preditoras, <b>w</b> é o vetor de pesos e y(.) é um
+							modelo/algoritmo de aprendizado de máquina.
+						</p>
+					</section>
+
+					<section>
+						<p style = "text-align:justify;">
+						 	A escolha de técnicas de classificação ou regressão depende da natureza da variável resposta.
+						</p>
+						<a> <img src = "img/class_reg.png" style = "text-align:center;" height="200"> </a>
+						<p style = "text-align:justify;">
+							<b>Classificação</b>: Com base no histórico de crédito do cliente, decidir o aceite de um empréstimo.
+							<br>
+							<b>Regressão</b>: Dada a imagem de uma pessoa, predizer sua idade.
+						</p>
+					</section>
+
+					<section>
+						<p style = "text-align:justify;">
+							O sucesso dos algoritmos de AM depende, em parte, do grau de discriminação das variáveis preditoras.
+							No contexto de imagens, variáveis preditoras não são um conceito "bem-definido".
+						</p>
+						<br>
+						<p style = "text-align:justify;">
+							A extração de características das imagens para classificação é comum, porém demanda
+							grande esforço de pré-processamento.
+						</p>
+						<br>
+						<p style = "text-align:justify;">
+							Técnicas de extração de variáveis automáticas,
+							tal como as
+
+							 redes neurais convolucionais,
+							podem ser vantajosas.
+						</p>
+
+					</section>
+
+				</section>
+
+				<section class = "ann">
+					<h1 style = "text-align:justify;font-weight: bold;"> Redes neurais artificiais </h1>
+					<section>
+						<p style = "text-align:justify;" >
+							As redes neurais artificiais são inspiradas no comportamento dos neurônios do cerébro.
+						</p>
+
+						<a> <img src = "img/um_neuronio.png" style = "text-align:center;" height="350"> </a>
+
+					</section>
+
+					<section>
+						<p style = "text-align:justify;" >
+							A informação agora é processada por cada camada e é passada pra próxima até a tomada de decisões.
+						</p>
+
+						<a> <img src = "img/multi_layer.png" style = "text-align:center;" height="400"> </a>
+
+					</section>
+					<section>
+						<p style = "text-align:justify;" >
+							Os tipos de neurônios se diferenciam pela função de ativação atribuídas a eles.
+					 </p>
+
+					 <a> <img src = "img/ativacao	.png" style = "text-align:center;" height="300"> </a>
+
+					</section>
+
+					<section>
+						<p style = "text-align:justify;" >
+							A adaptação dos pesos é baseada na minimização de uma função custo E(<b>w</b>).
+							A função custo avalia o desempenho da rede para a tomada de decisões no conjunto de exemplos.
+						</p>
+
+						<a> <img src = "img/gradiente.png" style = "text-align:center;" height="250"> </a>
+
+						<p style = "text-align:justify;" >
+							Os pesos são atualizados de forma que
+							${w_{j}^{(t+1)}} = {w_{j}^{(t)}} + \lambda \frac{\partial E(\textbf{w})}{\partial w_{j}}$.
+						</p>
+					</section>
+
+					<section>
+						<p style = "text-align:justify;" >
+							A otimização da função custo pode ser simplificada utilizando a propriedade de decomposição das derivadas.
+						</p>
+
+						<a> <img src = "img/backpropaga.gif" style = "text-align:center;" height="300"> </a>
+
+						<p style = "text-align:justify;" >
+							O processo de otimização continua até o critério de parada ou o número de epócas.
+						</p>
+					</section>
+				</section>
+
+				<section class = "wisc">
+					<h1 style = "text-align:justify;font-weight: bold;">Wisconsin Dataset</h1>
+					<section>
+						<p style = "text-align:justify;" >
+							O procedimento de diagnóstico utilizado começa com a extração de uma pequena quantidade de fluído do nódulo na mama usando uma agulha.
+						</p>
+
+						<a> <img src = "img/imagem_exemplo.png" height="250"> </img> </a>
+
+						<p style = "text-align:justify;" >
+							O material é então aspirado e expresso em uma lâmina de vidro e corado.
+							A imagem para análise digital é gerada por uma câmera de vídeo colorida montada sobre o microscópio.
+						</p>
+					</section>
+
+					<section>
+						<p style = "text-align:justify;" >
+							Dez medidas são extraídas de cada núcleo celular presente nas imagens computadorizadas.
+						</p>
+
+						<a> <img src="img/tabela_variaveis.png" height="250"> </img> </a>
+
+						<p style = "text-align:justify;" >
+							De cada imagem foram extraídas as médias, desvio padrão e maior valores das medidas computadas sobre os núcleos das células.
+						</p>
+
+						<p style = "text-align:justify;">
+							O teste de Wilcoxon-Mann-Whitney foi utilizado para avaliar o grau discriminativo de cada variável (3 variáveis removidas).
+						</p>
+					</section>
+
+					<section>
+						<p style = "text-align:justify;" >
+							A técnica de análise de componentes principais foi utilizada pra reduzir a colineariedade das variáveis.
+						</p>
+
+						<table style="width:100%">
+							<tr>
+								<th>Número de componentes</th>
+								<th>27</th>
+								<th>17</th>
+								<th>10</th>
+								<th>7</th>
+								<th>2</th>
+							</tr>
+							<tr>
+								<th>% de variância extraída</th>
+								<th>100</th>
+								<th>99</th>
+								<th>95</th>
+								<th>90</th>
+								<th>68</th>
+							</tr>
+						</table>
+
+						<p style = "text-align:justify;" >
+							Em cada base de dados foram implementados os principais algoritmos de AM clássico:
+							regressão logística, K-vizinhos mais próximos (KNN), árvore de decisão e máquina de suporte vetorial
+							(SVM) e diferentes arquiteturas de ANN’s com até três camadas.
+						</p>
+
+						<p style = "text-align:justify;">
+							As arquiteturas variavam de acordo com o número de camadas e o número de neurônios em cada camada.
+							 O número máximo de neurônios em cada camada é 18 e o número mínimo é 0, aumentando de 3 em 3.
+							  Ao todo 259 arquiteturas foram testadas.
+						</p>
+					</section>
+
+					<section>
+
+						<a> <img src = "img/mlps.png" height="400"> </img> </a>
+
+						<p style = "text-align:justify;" >
+							A medida que o número de componentes aumenta a acurácia das ANN's aumenta.
+						</p>
+
+						<p style = "text-align:justify;" >
+							Os melhores resultados de desempenho preditivo dos algoritmos foram obtidos com 17 componentes.
+						</p>
+					</section>
+
+					<section>
+						<p style = "text-align:justify;" >
+							O melhor algoritmo foi uma MLP(6,3,12) que obteve 98.4% de acurácia.
+						</p>
+
+						<a> <img src = "img/acc.png" height="380"> </img> </a>
+
+						<p style = "text-align:justify;" >
+							As arquiteturas de ANN's obtiveram acurácias em torno de 1.5% maiores em relação aos métodos de AM clássicos.
+						</p>
+					</section>
+
+				</section>
+
+				<section class = "cnn">
+					<h1 style = "text-align:justify;font-weight: bold;"> Redes neurais convolucionais </h1>
+					<section>
+
+					</section>
+				</section>
+
+				<section class = "conclusao">
+					<h1 style = "text-align:justify;font-weight: bold;"> Conclusão </h1>
+					<section>
+
+					</section>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: '/plugin/math/math.js', async: true },
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
