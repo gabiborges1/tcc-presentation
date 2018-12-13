@@ -92,9 +92,9 @@
 						 	A interpretação humana é afetada pela fadiga e subjetividade e pode gerar diagnósticos errados
 							 (<a href = "https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7463094">Greenspan, 2016 </a>).
 						</p>
-
+						<br>
 						<a> <img src = "img/performance.png" style = "text-align:center;"> </a>
-
+						<br>
 						<p style = "text-align:justify;" >
 							Com os avanços no processamento de imagens, reconhecimento de padrões e
 							aprendizado de máquina tem sido possível melhorar o diagnóstico dos radiologistas
@@ -305,12 +305,12 @@
 								<th>2</th>
 							</tr>
 							<tr>
-								<th>% de variância extraída</th>
-								<th>100</th>
-								<th>99</th>
-								<th>95</th>
-								<th>90</th>
-								<th>68</th>
+								<th style="font-weight:normal;">% de variância extraída</th>
+								<th style="font-weight:normal;">100</th>
+								<th style="font-weight:normal;">99</th>
+								<th style="font-weight:normal;">95</th>
+								<th style="font-weight:normal;">90</th>
+								<th style="font-weight:normal;">68</th>
 							</tr>
 						</table>
 
@@ -394,6 +394,57 @@
 							A camada convolucional é responsável por extrair características e atributos das imagens de entrada.
 							 A camada de <i> pooling </i> reduz a dimensionalidade dos dados.
 						</p>
+					</section>
+				</section>
+
+				<section class = "mias">
+					<h1 style = "text-align:justify;font-weight: bold;">MIAS Dataset </h1>
+					<section>
+						<p style = "text-align:justify;">
+							MIAS é um grupo de cientistas interessados em diagnóstico de mamografias que
+							disponibilizou uma base de dados de mamografias digitalizadas.
+						</p>
+
+						<a> <img src= "img/imagens.png" height="300"> </img> </a>
+
+						<p style = "text-align:justify;">
+							O banco de dados contém 322 imagens com resolução 1024x1024 além do
+							diagnóstico verdadeiro e localização de anomalia, caso esta esteja presente.
+						</p>
+					</section>
+
+					<section>
+						<p style = "text-align:justify;">
+							As mamografias são classificadas de acordo com a presença e tipo de anomalia, sua gravidade, sua posição e seu raio.
+							O presente estudo se limitou a classificação de presença de anomalia e sua gravidade.
+						</p>
+						<br>
+						<table style="width:50%">
+							<tr>
+								<th>Status da mamografia</th>
+								<th>N</th>
+							</tr>
+							<tr>
+								<th style="font-weight:normal;">Benigno</th>
+								<th style="font-weight:normal;">61</th>
+							</tr>
+							<tr>
+								<th style="font-weight:normal;">Maligno</th>
+								<th style="font-weight:normal;">52</th>
+							</tr>
+							<tr>
+								<th style="font-weight:normal;">Normal</th>
+								<th style="font-weight:normal;">209</th>
+							</tr>
+						</table>
+						<br>
+						<p style = "text-align:justify;">
+							As imagens originais contém bordas e elementos não desejados.
+						</p>
+					</section>
+
+					<section>
+						<a> <img src= "img/pre.png"> </img> </a>
 					</section>
 				</section>
 
