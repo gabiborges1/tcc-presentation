@@ -31,7 +31,7 @@
 
 		<div class="reveal">
 			<div class="slides">
-				<section id = "titulo" style = "text-align:justify;">
+				<section id = "titulo" style = "text-align:left;">
 					<h1 style = "font-size:60px;font-weight: bold;"> Redes neurais convolucionais: Um classificador para diagnóstico de câncer de mama. </h1>
 					<p style = "font-size:25px" >Gabriela Borges </p>
 					<p style = "font-size:25px" >Prof. Dr. Ricardo Rocha</p>
@@ -48,9 +48,7 @@
 								<li> Estudo de caso: Wisconsin Dataset </li>
 							</ul>
 						</li>
-						<li> Redes neurais c
-
-							onvolucionais
+						<li> Redes neurais convolucionais
 							<ul>
 								<li> Conceitos gerais </li>
 								<li> Estudo de caso: MIAS Dataset </li>
@@ -63,7 +61,11 @@
 				<section class = "introducao">
 					<h1 style = "text-align:justify;font-weight: bold;"> Introdução </h1>
 					<section>
-						<p style = "text-align:justify;" > O diagnóstico médico é o processo analítico de
+
+					</section>
+					<section>
+						<p style = "text-align:justify;" >
+							O diagnóstico médico é o processo analítico de
 							 um exame ou quadro clínico para chegada de uma conclusão.
 						</p>
 
@@ -180,28 +182,6 @@
 							<b>Regressão</b>: Dada a imagem de uma pessoa, predizer sua idade.
 						</p>
 					</section>
-
-					<section>
-						<p style = "text-align:justify;">
-							O sucesso dos algoritmos de AM depende, em parte, do grau de discriminação das variáveis preditoras.
-							No contexto de imagens, variáveis preditoras não são um conceito "bem-definido".
-						</p>
-						<br>
-						<p style = "text-align:justify;">
-							A extração de características das imagens para classificação é comum, porém demanda
-							grande esforço de pré-processamento.
-						</p>
-						<br>
-						<p style = "text-align:justify;">
-							Técnicas de extração de variáveis automáticas,
-							tal como as
-
-							 redes neurais convolucionais,
-							podem ser vantajosas.
-						</p>
-
-					</section>
-
 				</section>
 
 				<section class = "ann">
@@ -374,7 +354,7 @@
 							características usando pequenas partes da imagem de entrada.
 						</p>
 
-						<a> <img src= "img/lenet.png" height="300"> </img> </a>
+						<a> <img src= "img/cnn.png" height="300"> </img> </a>
 
 						<p style = "text-align:justify;">
 							A camada convolucional é responsável por extrair características e atributos das imagens de entrada.
@@ -383,23 +363,53 @@
 					</section>
 
 					<section>
+
+						<a> <img src= "img/cat.png" height="500px"> </img> </a>
+					</section>
+
+					<section>
 						<p style = "text-align:justify;">
-							As CNN's tem como vantagem a preservação da relação entre os pixels extraindo
-							características usando pequenas partes da imagem de entrada.
+						 A convolução consiste no processode uma matriz filtro percorrer a matriz de entrada,
+						  calculando o produto interno com a parte da imagem corrente que será resultado de um único pixel de saída.
 						</p>
 
-						<a> <img src= "img/convolucao.gif" height="300"> </img> </a>
+						<a> <img src= "img/conv.gif" height="300"> </img> <img src= "img/conv.gif" height="300"> </img> <img src= "img/conv.gif" height="300"> </img></a>
 
 						<p style = "text-align:justify;">
-							A camada convolucional é responsável por extrair características e atributos das imagens de entrada.
-							 A camada de <i> pooling </i> reduz a dimensionalidade dos dados.
+							Uma camada convolucional tem diversos filtros e resultado da camada é chamado de <i>feature map</i>.
+						</p>
+					</section>
+
+
+					<section>
+						<a> <img src= "img/convolu.png" height="500px"> </img> </a>
+					</section>
+
+					<section>
+						<p style = "text-align:justify;">
+						 A camada de pooling reduz a dimensionalidade preservando as informações mais importantes da <i>feature map</i>.
+						</p>
+
+						<a> <img src= "img/maxpool.png" height="300"> </img></a>
+
+					</section>
+
+					<section>
+						<p style = "text-align:justify;">
+						 <i>Dropout</i> é uma das técnicas para evitar overfitting das redes neurais artificiais.
+						</p>
+
+						<a> <img src= "img/dropout.png" height="400"> </img></a>
+
+						<p style = "text-align:justify;">
+							Basicamente, durante o treinamento, um percentual p de neurônios de uma camada particular será desativado.
 						</p>
 					</section>
 				</section>
 
 				<section class = "mias">
-					<h1 style = "text-align:justify;font-weight: bold;">MIAS Dataset </h1>
 					<section>
+						<h1 style = "text-size:30;text-align:justify;font-weight: bold;">MIAS Dataset </h1>
 						<p style = "text-align:justify;">
 							MIAS é um grupo de cientistas interessados em diagnóstico de mamografias que
 							disponibilizou uma base de dados de mamografias digitalizadas.
@@ -414,6 +424,7 @@
 					</section>
 
 					<section>
+						<h1 style = "text-size:30;text-align:justify;font-weight: bold;">MIAS Dataset </h1>
 						<p style = "text-align:justify;">
 							As mamografias são classificadas de acordo com a presença e tipo de anomalia, sua gravidade, sua posição e seu raio.
 							O presente estudo se limitou a classificação de presença de anomalia e sua gravidade.
@@ -445,6 +456,20 @@
 
 					<section>
 						<a> <img src= "img/pre.png"> </img> </a>
+					</section>
+
+					<section>
+						<h1 style = "text-size:30;text-align:justify;font-weight: bold;">MIAS Dataset </h1>
+						<p style = "text-align:justify;">
+							A resolução das imagens foi reduzida a 128x128 e 256x256 pixels.
+						</p>
+
+						<a> <img src= "img/tabela_cnn.png"> </img> </a>
+					</section>
+
+					<section>
+						<h1 style = "text-size:30;text-align:justify;font-weight: bold;">MIAS Dataset </h1>
+						<a> <img src= "img/resultados.png"> </img> </a>
 					</section>
 				</section>
 
